@@ -32,10 +32,6 @@ export function getPluginsList(
     checker({
       typescript: true,
       vueTsc: true,
-      eslint: {
-        lintCommand: `eslint ${pathResolve("../{src,mock,build}/**/*.{vue,js,ts,tsx}")}`,
-        useFlatConfig: true
-      },
       terminal: false,
       enableBuild: false
     }),

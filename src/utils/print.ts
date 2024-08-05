@@ -144,7 +144,6 @@ Print.prototype = {
       removes[k].parentNode.removeChild(removes[k]);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _this = this;
     iframe.onload = function (): void {
       // Before popping, callback

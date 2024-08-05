@@ -270,7 +270,6 @@ var Module = typeof Module != "undefined" ? Module : {};
         typeof TypedArray != "function" ||
         TypedArray === Function.prototype
       ) {
-        // eslint-disable-next-line no-shadow
         TypedArray = function TypedArray() {
           throw TypeError("Incorrect invocation");
         };
@@ -637,12 +636,12 @@ var Module = typeof Module != "undefined" ? Module : {};
             NativeArrayBuffer(1);
           }) ||
           !fails(function () {
-            new NativeArrayBuffer(-1); // eslint-disable-line no-new
+            new NativeArrayBuffer(-1);
           }) ||
           fails(function () {
-            new NativeArrayBuffer(); // eslint-disable-line no-new
-            new NativeArrayBuffer(1.5); // eslint-disable-line no-new
-            new NativeArrayBuffer(NaN); // eslint-disable-line no-new
+            new NativeArrayBuffer();
+            new NativeArrayBuffer(1.5);
+            new NativeArrayBuffer(NaN);
             return NativeArrayBuffer.name != ARRAY_BUFFER;
           })
         ) {
@@ -784,11 +783,9 @@ var Module = typeof Module != "undefined" ? Module : {};
           var index = toAbsoluteIndex(fromIndex, length);
           var value;
           // Array#includes uses SameValueZero equality algorithm
-          // eslint-disable-next-line no-self-compare
           if (IS_INCLUDES && el != el)
             while (length > index) {
               value = O[index++];
-              // eslint-disable-next-line no-self-compare
               if (value != value) return true;
               // Array#indexOf ignores holes, Array#includes - not
             }
@@ -943,7 +940,6 @@ var Module = typeof Module != "undefined" ? Module : {};
         return (
           !!method &&
           fails(function () {
-            // eslint-disable-next-line no-useless-call,no-throw-literal
             method.call(
               null,
               argument ||
@@ -1076,7 +1072,6 @@ var Module = typeof Module != "undefined" ? Module : {};
         iteratorWithReturn[ITERATOR] = function () {
           return this;
         };
-        // eslint-disable-next-line no-throw-literal
         Array.from(iteratorWithReturn, function () {
           throw 2;
         });
@@ -1810,14 +1805,12 @@ var Module = typeof Module != "undefined" ? Module : {};
 
       // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
       module.exports =
-        // eslint-disable-next-line no-undef
         check(typeof globalThis == "object" && globalThis) ||
         check(typeof window == "object" && window) ||
         check(typeof self == "object" && self) ||
         check(
           typeof __webpack_require__.g == "object" && __webpack_require__.g
         ) ||
-        // eslint-disable-next-line no-new-func
         Function("return this")();
 
       /***/
@@ -1895,7 +1888,6 @@ var Module = typeof Module != "undefined" ? Module : {};
 
     /***/ 1179: /***/ function (module) {
       // IEEE754 conversions based on https://github.com/feross/ieee754
-      // eslint-disable-next-line no-shadow-restricted-names
       var Infinity = 1 / 0;
       var abs = Math.abs;
       var pow = Math.pow;
@@ -1913,9 +1905,7 @@ var Module = typeof Module != "undefined" ? Module : {};
         var index = 0;
         var exponent, mantissa, c;
         number = abs(number);
-        // eslint-disable-next-line no-self-compare
         if (number != number || number === Infinity) {
-          // eslint-disable-next-line no-self-compare
           mantissa = number != number ? 1 : 0;
           exponent = eMax;
         } else {
@@ -2016,7 +2006,6 @@ var Module = typeof Module != "undefined" ? Module : {};
       // fallback for non-array-like ES3 and non-enumerable old V8 strings
       module.exports = fails(function () {
         // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-        // eslint-disable-next-line no-prototype-builtins
         return !Object("z").propertyIsEnumerable(0);
       })
         ? function (it) {
@@ -2481,7 +2470,6 @@ var Module = typeof Module != "undefined" ? Module : {};
         !!Object.getOwnPropertySymbols &&
         !fails(function () {
           // Chrome 38 Symbol has incorrect toString conversion
-          // eslint-disable-next-line no-undef
           return !String(Symbol());
         });
 
@@ -2871,7 +2859,6 @@ var Module = typeof Module != "undefined" ? Module : {};
       // `Object.setPrototypeOf` method
       // https://tc39.github.io/ecma262/#sec-object.setprototypeof
       // Works with __proto__ only. Old v8 can't work with null proto objects.
-      /* eslint-disable no-proto */
       module.exports =
         Object.setPrototypeOf ||
         ("__proto__" in {}
@@ -3244,7 +3231,6 @@ var Module = typeof Module != "undefined" ? Module : {};
       var defer, channel, port;
 
       var run = function (id) {
-        // eslint-disable-next-line no-prototype-builtins
         if (queue.hasOwnProperty(id)) {
           var fn = queue[id];
           delete queue[id];
@@ -3274,7 +3260,6 @@ var Module = typeof Module != "undefined" ? Module : {};
           var i = 1;
           while (arguments.length > i) args.push(arguments[i++]);
           queue[++counter] = function () {
-            // eslint-disable-next-line no-new-func
             (typeof fn == "function" ? fn : Function(fn)).apply(
               undefined,
               args
@@ -3867,7 +3852,6 @@ var Module = typeof Module != "undefined" ? Module : {};
       __unused_webpack_exports,
       __webpack_require__
     ) {
-      /* eslint-disable no-new */
       var global = __webpack_require__(7854);
       var fails = __webpack_require__(7293);
       var checkCorrectnessOfIteration = __webpack_require__(7072);
@@ -3969,9 +3953,7 @@ var Module = typeof Module != "undefined" ? Module : {};
 
       module.exports =
         NATIVE_SYMBOL &&
-        // eslint-disable-next-line no-undef
         !Symbol.sham &&
-        // eslint-disable-next-line no-undef
         typeof Symbol.iterator == "symbol";
 
       /***/
@@ -4549,7 +4531,6 @@ var Module = typeof Module != "undefined" ? Module : {};
             internalReject(this, state, error);
           }
         };
-        // eslint-disable-next-line no-unused-vars
         Internal = function Promise(executor) {
           setInternalState(this, {
             type: PROMISE,
@@ -4619,7 +4600,6 @@ var Module = typeof Module != "undefined" ? Module : {};
             $(
               { global: true, enumerable: true, forced: true },
               {
-                // eslint-disable-next-line no-unused-vars
                 fetch: function fetch(input /* , init */) {
                   return promiseResolve(
                     PromiseConstructor,
@@ -4878,7 +4858,6 @@ var Module = typeof Module != "undefined" ? Module : {};
 
       // `%TypedArray%.prototype.fill` method
       // https://tc39.github.io/ecma262/#sec-%typedarray%.prototype.fill
-      // eslint-disable-next-line no-unused-vars
       exportTypedArrayMethod("fill", function fill(value /* , start, end */) {
         return $fill.apply(aTypedArray(this), arguments);
       });
@@ -4954,7 +4933,6 @@ var Module = typeof Module != "undefined" ? Module : {};
       var exportTypedArrayMethod = ArrayBufferViewCore.exportTypedArrayMethod;
 
       var FORCED = fails(function () {
-        // eslint-disable-next-line no-undef
         new Int8Array(1).set({});
       });
 
@@ -6108,7 +6086,6 @@ var Module = typeof Module != "undefined" ? Module : {};
     const imageCapture = new ImageCapture();
     let isInit = false;
     const metaDataMap = {};
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function transpostFrame(ptr, id) {
       const data = imageCapture.getImageInfo(ptr / 4);
       // push到数组列表

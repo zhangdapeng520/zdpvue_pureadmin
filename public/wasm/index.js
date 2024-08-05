@@ -142,11 +142,9 @@
             var index = toAbsoluteIndex(fromIndex, length);
             var value;
             // Array#includes uses SameValueZero equality algorithm
-            // eslint-disable-next-line no-self-compare
             if (IS_INCLUDES && el != el)
               while (length > index) {
                 value = O[index++];
-                // eslint-disable-next-line no-self-compare
                 if (value != value) return true;
                 // Array#indexOf ignores holes, Array#includes - not
               }
@@ -301,7 +299,6 @@
           return (
             !!method &&
             fails(function () {
-              // eslint-disable-next-line no-useless-call,no-throw-literal
               method.call(
                 null,
                 argument ||
@@ -435,7 +432,6 @@
           iteratorWithReturn[ITERATOR] = function () {
             return this;
           };
-          // eslint-disable-next-line no-throw-literal
           Array.from(iteratorWithReturn, function () {
             throw 2;
           });
@@ -821,7 +817,6 @@
             );
           };
 
-          // eslint-disable-next-line max-len
           if (
             isForced(
               CONSTRUCTOR_NAME,
@@ -853,7 +848,6 @@
               instance.has(1);
             });
             // most early implementations doesn't supports iterables, most modern - not close it correctly
-            // eslint-disable-next-line no-new
             var ACCEPT_ITERABLES = checkCorrectnessOfIteration(function (
               iterable
             ) {
@@ -1579,14 +1573,12 @@
 
         // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
         module.exports =
-          // eslint-disable-next-line no-undef
           check(typeof globalThis == "object" && globalThis) ||
           check(typeof window == "object" && window) ||
           check(typeof self == "object" && self) ||
           check(
             typeof __webpack_require__.g == "object" && __webpack_require__.g
           ) ||
-          // eslint-disable-next-line no-new-func
           Function("return this")();
 
         /***/
@@ -1675,7 +1667,6 @@
         // fallback for non-array-like ES3 and non-enumerable old V8 strings
         module.exports = fails(function () {
           // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-          // eslint-disable-next-line no-prototype-builtins
           return !Object("z").propertyIsEnumerable(0);
         })
           ? function (it) {
@@ -2230,7 +2221,6 @@
           !!Object.getOwnPropertySymbols &&
           !fails(function () {
             // Chrome 38 Symbol has incorrect toString conversion
-            // eslint-disable-next-line no-undef
             return !String(Symbol());
           });
 
@@ -2626,7 +2616,6 @@
         // `Object.setPrototypeOf` method
         // https://tc39.github.io/ecma262/#sec-object.setprototypeof
         // Works with __proto__ only. Old v8 can't work with null proto objects.
-        /* eslint-disable no-proto */
         module.exports =
           Object.setPrototypeOf ||
           ("__proto__" in {}
@@ -3002,7 +2991,6 @@
         var defer, channel, port;
 
         var run = function (id) {
-          // eslint-disable-next-line no-prototype-builtins
           if (queue.hasOwnProperty(id)) {
             var fn = queue[id];
             delete queue[id];
@@ -3032,7 +3020,6 @@
             var i = 1;
             while (arguments.length > i) args.push(arguments[i++]);
             queue[++counter] = function () {
-              // eslint-disable-next-line no-new-func
               (typeof fn == "function" ? fn : Function(fn)).apply(
                 undefined,
                 args
@@ -3262,9 +3249,7 @@
 
         module.exports =
           NATIVE_SYMBOL &&
-          // eslint-disable-next-line no-undef
           !Symbol.sham &&
-          // eslint-disable-next-line no-undef
           typeof Symbol.iterator == "symbol";
 
         /***/
@@ -3916,7 +3901,6 @@
               internalReject(this, state, error);
             }
           };
-          // eslint-disable-next-line no-unused-vars
           Internal = function Promise(executor) {
             setInternalState(this, {
               type: PROMISE,
@@ -3987,7 +3971,6 @@
               $(
                 { global: true, enumerable: true, forced: true },
                 {
-                  // eslint-disable-next-line no-unused-vars
                   fetch: function fetch(input /* , init */) {
                     return promiseResolve(
                       PromiseConstructor,
